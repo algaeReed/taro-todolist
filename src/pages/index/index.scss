@@ -1,0 +1,24 @@
+.list{
+    height: 100rpx;
+    .item{
+        height: 100rpx;
+        border: 1px solid #eee;
+        .swipe-action{
+            height: 100rpx;
+            background: #6190e8;
+            line-height: 100rpx;
+            .label{
+                margin-left: 30rpx;
+                height: 100rpx;
+            }
+            .checkbox{
+                height: 100rpx;
+                width: 80%;
+                // background: red;
+            }
+    
+
+        }
+        
+    }
+}
