@@ -84,7 +84,7 @@ export default class charts extends Component {
                 </View>
                 <View className='title'>
                     <Text>
-                        一周内：一共{todosLength}条，
+                        本周内：一共{todosLength}条，
                     </Text>
                     <Text>
                         已完成{todosFinished}条，

@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import { AtSearchBar, AtTag, AtSwipeAction } from 'taro-ui'
+import { AtSearchBar, AtTag, AtSwipeAction, AtButton } from 'taro-ui'
 
 import { Component } from 'react'
 import { View, Checkbox, Label } from '@tarojs/components'
@@ -38,12 +38,14 @@ export default class Index extends Component {
 
   // eslint-disable-next-line react/sort-comp
   state = {
-    todos: [{ "value": "63ba7491-44fb-4e1a-84ab-aa668585dcdf", "label": "点击完成", "done": false, "checkbox": false, "time": "2022-5-1 6:14:12" },
-    { "value": "381a8347-fd25-475d-a7c9-cdd3600f3c2d", "label": "待办延时", "done": false, "checkbox": true, "time": "2022-5-1 6:14:8" },
-    { "value": "381a8347-fd25-475d-a7c9-cdd3600f4c2d", "label": "侧滑删除", "done": false, "checkbox": true, "time": "2022-5-1 6:14:8" },
-    { "value": "381a8347-fd25-475d-a7c9-c3d3600f4c2d", "label": "侧滑删除1", "done": false, "checkbox": true, "time": "2022-4-1 6:14:8" },
-    { "value": "381a8347-fd25-475d-a7c9-crd3600f4c2d", "label": "侧滑删除3", "done": false, "checkbox": true, "time": "2022-4-22 6:14:8" },
-    { "value": "381a8347-fd25-475d-a7c9-cdy3600f4c2d", "label": "侧滑删除4", "done": false, "checkbox": true, "time": "2022-4-29 6:14:8" },
+    tmplIds: ['KiAYNRxjVbtQbKNQa_2-evFDDaq8mV1yYqnCdmTmwlI'],
+    todos: [
+    //   { "value": "63ba7491-44fb-4e1a-84ab-aa668585dcdf", "label": "点击完成", "done": false, "checkbox": false, "time": "2022-5-1 6:14:12" },
+    // { "value": "381a8347-fd25-475d-a7c9-cdd3600f3c2d", "label": "待办延时", "done": false, "checkbox": true, "time": "2022-5-1 6:14:8" },
+    // { "value": "381a8347-fd25-475d-a7c9-cdd3600f4c2d", "label": "侧滑删除", "done": false, "checkbox": true, "time": "2022-5-1 6:14:8" },
+    // { "value": "381a8347-fd25-475d-a7c9-c3d3600f4c2d", "label": "侧滑删除1", "done": false, "checkbox": true, "time": "2022-4-1 6:14:8" },
+    // { "value": "381a8347-fd25-475d-a7c9-crd3600f4c2d", "label": "侧滑删除3", "done": false, "checkbox": true, "time": "2022-4-22 6:14:8" },
+    // { "value": "381a8347-fd25-475d-a7c9-cdy3600f4c2d", "label": "侧滑删除4", "done": false, "checkbox": true, "time": "2022-4-29 6:14:8" },
 
     ],
     value: "",
@@ -173,19 +175,30 @@ export default class Index extends Component {
       data: JSON.stringify(newTodos)
     });
   };
+
+  pushMessage = () => {
+    console.log("push")
+
+    Taro.requestSubscribeMessage({
+      tmplIds: this.state.tmplIds,
+      success: function (res) {
+        console.log(res)
+      }
+    })
+
+
+
+  }
   render() {
 
     const { todos } = this.state;
     const { options } = this.state;
 
-    Taro.setStorage({
-      key: 'todos',
-      data: JSON.stringify(todos)
-    });
-    // const filter = todos.filter((e) => {
-    //   return e.checkbox == false
-    // })
-    // console.log(filter)
+    // Taro.setStorage({
+    //   key: 'todos',
+    //   data: JSON.stringify(todos)
+    // });
+
     console.log(todos);
 
     return (
@@ -218,6 +231,8 @@ export default class Index extends Component {
                   </Label>
                   <AtTag size='small' active={item.checkbox} >{item.checkbox ? '已完成' : '未完成'}</AtTag>
                 </AtSwipeAction>
+                {/* <AtButton onClick={this.pushMessage.bind(this)} >推送</AtButton> */}
+
               </View>
             )
           })}
